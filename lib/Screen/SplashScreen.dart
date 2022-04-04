@@ -1,6 +1,7 @@
 import 'package:comuse/Constants/ColorConstants.dart';
 import 'package:comuse/Provider/Auth_provider.dart';
-import 'package:comuse/Screen/MainScreen.dart';
+import 'MainScreen.dart';
+
 import 'package:comuse/Screen/loginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,13 +28,13 @@ class _SplashScreenState extends State<SplashScreen> {
     if (isLoggedIn) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const MainScreen()),
+        MaterialPageRoute(builder: (context) => MainScreen()),
       );
       return;
     }
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => LoginScreen()),
+      MaterialPageRoute(builder: (context) => const LoginScreen()),
     );
   }
 
@@ -44,12 +45,17 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset('assets/Comuse_Icon.png', width: 100, height: 100,),
+            Image.asset(
+              'assets/Comuse_Icon.png',
+              width: 100,
+              height: 100,
+            ),
             SizedBox(height: 20),
             Container(
               width: 20,
               height: 20,
-              child: CircularProgressIndicator(color: ColorConstants.themeColor),
+              child:
+                  CircularProgressIndicator(color: ColorConstants.themeColor),
             )
           ],
         ),

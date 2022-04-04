@@ -47,6 +47,7 @@ dependencies:
   json_serializable: ^6.1.5
   uuid: ^3.0.6
   modal_bottom_sheet: ^2.0.1
+  flame: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +74,16 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/Comuse_Icon.png
+    - assets/images/man_character.png
+    - assets/images/woman_character.png
+    - assets/images/background.png
+    - assets/images/bass.png
+    - assets/images/guitar.png
+    - assets/images/piano.png
+    - assets/images/vocal.png
+    - assets/images/drum.png
+    - assets/images/bass.png
+    
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

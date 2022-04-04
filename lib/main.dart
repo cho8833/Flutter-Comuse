@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:comuse/Constants/AppConstants.dart';
 import 'package:comuse/Provider/Auth_provider.dart';
@@ -13,7 +15,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp( 
     options: DefaultFirebaseOptions.currentPlatform
@@ -25,6 +27,7 @@ void main() async {
 class ComuseApp extends StatelessWidget {
   final SharedPreferences prefs;
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+   
 
   ComuseApp({required this.prefs});
 
@@ -67,3 +70,4 @@ class ComuseApp extends StatelessWidget {
     );
   }
 }
+

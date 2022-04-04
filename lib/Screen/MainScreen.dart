@@ -1,5 +1,5 @@
 import 'package:comuse/Screen/SettingScreen.dart';
-import 'package:comuse/Screen/MemberScreen.dart';
+import 'AnimatedMemberScreen2.dart';
 import 'package:comuse/Screen/TeamScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +31,9 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: _widgetOptions.elementAt(_selectedIndex),),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(

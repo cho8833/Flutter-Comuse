@@ -4,4 +4,7 @@ class AppConstants {
   static const homeTitle = "Home";
   static const settingsTitle = "Settings";
   static const fullPhotoTitle = "Full Photo";
+  static const characterManImage = "assets/images/man_character.png";
+  static const characterWomanImage = "assets/images/woman_character.png";
+  
 }

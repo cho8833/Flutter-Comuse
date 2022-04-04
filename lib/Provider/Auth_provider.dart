@@ -13,6 +13,7 @@ enum Status {
   authenticateError,
   authenticateCanceled,
 }
+
 class AuthProvider extends ChangeNotifier {
   final GoogleSignIn googleSignIn;
   final FirebaseAuth firebaseAuth;
