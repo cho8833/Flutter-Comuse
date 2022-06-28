@@ -1,9 +1,11 @@
 class FirestoreConstants {
   static const pathMemberCollection = "Members";
   static const pathTeamCollection = 'Teams';
+  static const pathEnteredCollection = 'Entered';
   static const name = 'name';
   static const permission = "permission";
   static const uid = "uid";
+  static const email = "email";
   static const isEntered = "isEntered";
   static const position = "position";
   static const timestamp = "timestamp";

@@ -47,7 +47,14 @@ dependencies:
   json_serializable: ^6.1.5
   uuid: ^3.0.6
   modal_bottom_sheet: ^2.0.1
-  flame: ^1.1.0
+  transition: ^2.0.2
+  dots_indicator: ^2.1.0
+  flutter_staggered_animations: ^1.0.0
+  animated_check: ^1.0.5
+  syncfusion_flutter_datepicker: ^20.1.50
+  select_form_field: ^2.2.0
+  firebase_database: ^9.0.13
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
@@ -74,8 +81,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/Comuse_Icon.png
-    - assets/images/man_character.png
-    - assets/images/woman_character.png
     - assets/images/background.png
     - assets/images/bass.png
     - assets/images/guitar.png
@@ -83,7 +88,13 @@ flutter:
     - assets/images/vocal.png
     - assets/images/drum.png
     - assets/images/bass.png
-    
+    - assets/images/settings.png
+    - assets/images/screen/guitarScreen.png
+    - assets/images/screen/bassScreen.png
+    - assets/images/screen/pianoScreen.png
+    - assets/images/screen/vocalScreen.png
+    - assets/images/screen/drumScreen.png
+    - assets/images/group.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
@@ -98,7 +109,11 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  fonts:
+      - family: Pacifico
+        fonts:
+          - asset: assets/font/Pacifico-Regular.ttf
+            weight: 200
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

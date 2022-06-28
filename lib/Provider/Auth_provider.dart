@@ -67,25 +67,27 @@ class AuthProvider extends ChangeNotifier {
             .get();
         final List<DocumentSnapshot> documents = result.docs;
         if (documents.isEmpty) {
+          
           // Writing data to server because here is a new user
           firebaseFirestore
               .collection(FirestoreConstants.pathMemberCollection)
               .doc(firebaseUser.uid)
               .set({
-            FirestoreConstants.name: firebaseUser.displayName,
-            FirestoreConstants.uid: firebaseUser.uid,
-            'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
-            FirestoreConstants.position: List<String>.empty(),
-            FirestoreConstants.isEntered: false,
-            // ************* need permission to noone  ****************
-            FirestoreConstants.permission: FirestoreConstants.member,
+                  FirestoreConstants.name: firebaseUser.displayName,
+                  FirestoreConstants.uid: firebaseUser.uid,
+                  'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
+                  FirestoreConstants.position: List<String>.empty(),
+                  FirestoreConstants.isEntered: false,
+                  FirestoreConstants.email: firebaseUser.email,
+                  // ************* need permission to noone  ****************
+                  FirestoreConstants.permission: FirestoreConstants.noone,
+          }).then((_) async {
+            // if writing data to db success, Write data to local storage
+            User? currentUser = firebaseUser;
+            await prefs.setString(FirestoreConstants.uid, currentUser.uid);
+            await prefs.setString(
+                FirestoreConstants.name, currentUser.displayName ?? "");
           });
-
-          // Write data to local storage
-          User? currentUser = firebaseUser;
-          await prefs.setString(FirestoreConstants.uid, currentUser.uid);
-          await prefs.setString(
-              FirestoreConstants.name, currentUser.displayName ?? "");
         } else {
           // Already sign up, just get data from firestore
           DocumentSnapshot documentSnapshot = documents[0];
@@ -95,8 +97,8 @@ class AuthProvider extends ChangeNotifier {
           await prefs.setString(FirestoreConstants.name, member.name);
           await prefs.setStringList(
               FirestoreConstants.position, member.position);
-          await prefs.setBool(FirestoreConstants.isEntered, member.isEntered);
           await prefs.setInt(FirestoreConstants.permission, member.permission);
+          await prefs.setString(FirestoreConstants.email, member.email);
         }
         _status = Status.authenticated;
         notifyListeners();
@@ -118,5 +120,6 @@ class AuthProvider extends ChangeNotifier {
     await firebaseAuth.signOut();
     await googleSignIn.disconnect();
     await googleSignIn.signOut();
+    await prefs.clear();
   }
 }

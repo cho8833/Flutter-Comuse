@@ -3,17 +3,20 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:comuse/Constants/AppConstants.dart';
 import 'package:comuse/Provider/Auth_provider.dart';
+import 'package:comuse/Provider/EnteredMemberProvider.dart';
+import 'package:comuse/Provider/HistoryProvider.dart';
 import 'package:comuse/Provider/Member_provider.dart';
 import 'package:comuse/Provider/Setting_provider.dart';
-import 'package:comuse/Provider/Team_provider.dart';
 import 'package:comuse/Screen/SplashScreen.dart';
 import 'package:comuse/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +30,7 @@ Future<void> main() async {
 class ComuseApp extends StatelessWidget {
   final SharedPreferences prefs;
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-   
+  final DatabaseReference rtdb = FirebaseDatabase.instance.ref();
 
   ComuseApp({required this.prefs});
 
@@ -43,6 +46,7 @@ class ComuseApp extends StatelessWidget {
             firebaseFirestore: firebaseFirestore,
           ),
         ),
+        
         Provider<SettingProvider>(
           create: (_) => SettingProvider(
             firebaseFirestore: firebaseFirestore,
@@ -55,12 +59,16 @@ class ComuseApp extends StatelessWidget {
             prefs: prefs
             )
           ),
-        Provider<TeamProvider>(
-          create: (_) => TeamProvider(
-            firebaseFirestore: firebaseFirestore,
-            prefs: prefs
-            )
-          ),
+        Provider<EnteredMemberProvider>(
+          create: (_) => EnteredMemberProvider(
+            firebaseFirestore: firebaseFirestore
+          )
+        ),
+        Provider<HistoryProvider>(
+          create: (_) => HistoryProvider(
+            db: rtdb
+          )
+        )
       ],
       child: const MaterialApp(
         home: SplashScreen(),

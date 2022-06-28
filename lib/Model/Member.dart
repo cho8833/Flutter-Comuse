@@ -15,16 +15,17 @@ class Member {
   Member({
     required this.name,
     required this.position,
-    required this.isEntered,
     required this.permission,
     required this.uid,
+    required this.email,
   });
 
-  String name;
+  final String name;
   List<String> position;
-  bool isEntered;
   int permission;
   String uid;
+  String email;
+  
 
   factory Member.fromJson(Map<String, dynamic> json) => _$MemberFromJson(json);
   Map<String, dynamic> toJson() => _$MemberToJson(this);
@@ -32,8 +33,8 @@ class Member {
   factory Member.fromDocument(DocumentSnapshot doc) {
     String name = "";
     List<String> position = List<String>.empty();
-    bool isEntered = false;
     int permission = 0;
+    String email = "";
 
     try {
       name = doc.get(FirestoreConstants.name);
@@ -41,21 +42,19 @@ class Member {
     try {
       List<dynamic> temp = doc.get(FirestoreConstants.position);
       position = temp.map((e) => e.toString()).toList();
-    } catch (e) {
-      print(e.toString());
-    }
-    try {
-      isEntered = doc.get(FirestoreConstants.isEntered);
     } catch (e) {}
     try {
       permission = doc.get(FirestoreConstants.permission);
+    } catch (e) {}
+    try {
+      email = doc.get(FirestoreConstants.email);
     } catch (e) {}
 
     return Member(
         name: name,
         position: position,
-        isEntered: isEntered,
         permission: permission,
-        uid: doc.id);
+        uid: doc.id,
+        email: email);
   }
 }

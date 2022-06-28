@@ -1,6 +1,7 @@
 import 'package:comuse/Constants/ColorConstants.dart';
 import 'package:comuse/Provider/Auth_provider.dart';
-import 'MainScreen.dart';
+import 'package:transition/transition.dart';
+import 'MemberScreen.dart/MemberScreen_Release.dart';
 
 import 'package:comuse/Screen/loginScreen.dart';
 import 'package:flutter/material.dart';
@@ -27,39 +28,29 @@ class _SplashScreenState extends State<SplashScreen> {
     bool isLoggedIn = await authProvider.isLoggedIn();
     if (isLoggedIn) {
       Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => MainScreen()),
-      );
+          context, MaterialPageRoute(builder: (context) => MemberScreen()));
       return;
     }
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const LoginScreen()),
+      MaterialPageRoute(builder: (context) => LoginScreen()),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset(
-              'assets/Comuse_Icon.png',
-              width: 100,
-              height: 100,
-            ),
-            SizedBox(height: 20),
-            Container(
-              width: 20,
-              height: 20,
-              child:
-                  CircularProgressIndicator(color: ColorConstants.themeColor),
-            )
-          ],
-        ),
-      ),
-    );
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                  width: 150,
+                  height: 150,
+                  child: const Image(
+                      image: AssetImage('assets/images/Comuse_Icon.png'))),
+            ],
+          ),
+        ));
   }
 }

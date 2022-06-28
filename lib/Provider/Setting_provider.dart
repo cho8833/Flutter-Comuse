@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:comuse/Constants/FirebaseConstants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../Model/Member.dart';
+
 class SettingProvider {
   final SharedPreferences prefs;
   final FirebaseFirestore firebaseFirestore;
@@ -22,6 +24,10 @@ class SettingProvider {
     return prefs.getStringList(FirestoreConstants.position);
   }
 
+  String? getEmailPref() {
+    return prefs.getString(FirestoreConstants.email);
+  }
+
   int? getPermissionPref() {
     return prefs.getInt(FirestoreConstants.permission);
   }
@@ -32,6 +38,10 @@ class SettingProvider {
 
   Future<bool> setNamePref(String value) async {
     return await prefs.setString(FirestoreConstants.name, value);
+  }
+
+  Future<bool> setEmailPref(String value) async {
+    return await prefs.setString(FirestoreConstants.email, value);
   }
 
   Future<bool> setPositionPref(List<String> value) async {
@@ -58,10 +68,10 @@ class SettingProvider {
         .update(dataNeedUpdate);
   }
 
-  Future<void> updateEnterFirestore(bool value, String uid) {
+  Stream<DocumentSnapshot> getUserInfoStream(String uid) {
     return firebaseFirestore
         .collection(FirestoreConstants.pathMemberCollection)
         .doc(uid)
-        .update({"isEntered": value});
+        .snapshots();
   }
 }
